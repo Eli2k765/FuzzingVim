@@ -1,0 +1,8 @@
+com-c -=0 Xn <mods><count>lne<bang><args>
+let s:bufnr=bufnr()
+ca setloclist(0,[{'0':0,'':''}]{'0':0,'':''}])
+au BufEoter :0,'':''}])
+au Buf* cal setlocist(ufnr,'':0,'0':''}],'r')
+:''},{'mufnr':s:b1,[{'':s:bufnr/'0':0,'t'lop
+cal assert_fails('exe"nkrm0j\2CR>"',[{'0':0,'':''}])
+au BufEot)Xn
