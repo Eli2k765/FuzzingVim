@@ -11,15 +11,15 @@ swapoff -a
 
 #Variables
 target=vim #change
-tmpDir=/home/fuzz/Desktop/Fuzzing/$target/tmp
+tmpDir=/home/$SUDO_USER/Desktop/Fuzzing/$target/tmp
 targetDir=$tmpDir/$target
 fuzzOut=$targetDir/fuzzOut
-fuzzIn=/home/fuzz/Desktop/Wordlists/Fuzzing/$target/testcases/
+fuzzIn=/home/$SUDO_USER/Desktop/Wordlists/Fuzzing/$target/testcases/
 
 
 #Use RAM for storage
 mkdir -p $tmpDir
-chown fuzz $tmpDir
+chown $SUDO_USER $tmpDir
 chmod 777 $tmpDir
 mount -t tmpfs -o size=4G tmpfs $tmpDir
 
@@ -47,5 +47,5 @@ else
     afl-fuzz -M Master -i $fuzzIn -o $fuzzOut ./$target -u NONE -X -Z -e -s -S @@ -c ':qa!' & afl-fuzz -S Slave -i $fuzzIn -o $fuzzOut ./$target -u NONE -X -Z -e -s -S @@ -c ':qa!'
 fi
 
-chown -R fuzz $tmpDir
+chown -R $SUDO_USER $tmpDir
 chmod -R 777 $tmpDir
