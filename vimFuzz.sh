@@ -13,8 +13,9 @@ swapoff -a
 target=vim #change
 tmpDir=/home/$SUDO_USER/Desktop/Fuzzing/$target/tmp
 targetDir=$tmpDir/$target
-fuzzOut=$targetDir/fuzzOut
-fuzzIn=/home/$SUDO_USER/Desktop/Wordlists/Fuzzing/$target/testcases/
+fuzzOut=$tmpDir/fuzzOut
+currentDir=$(pwd)
+fuzzIn=$currentDir/testcases/
 
 
 #Use RAM for storage
@@ -40,6 +41,7 @@ CC=afl-clang-fast CXX=afl-clang-fast++ ./configure --with-features=huge --enable
 
 
 #Fuzz
+cd $targetDir/vim/src
 
 if [ -d $fuzzOut ]; then
     afl-fuzz -M Master -i - -o $fuzzOut ./$target -u NONE -X -Z -e -s -S @@ -c ':qa!' & afl-fuzz -S Slave -i - $fuzzIn -o $fuzzOut ./$target -u NONE -X -Z -e -s -S @@ -c ':qa!'
